@@ -21,19 +21,26 @@ if(isset($_POST["password"])){
  * Questa funzione controlla se nell'array di utenti il nome e la psw coincidono
  */
 function authenticate($user, $psw, $userList){
+    $_SESSION["isLogged"] = false;
+    
     foreach ($userList as $username => $password) {
-        if($user==$username && $psw==$password){
-            echo "grande fra ti sei loggato";
-            return true;
-        }else {
-            echo "mannaggia non ci siamo";
-            return false;
+        if($user == $username && $psw == $password){
+            $_SESSION["isLogged"] = true;
+            break;
         }
     }
+    
+    return $_SESSION["isLogged"];
 }
 
-authenticate($_SESSION["username"], $_SESSION["password"], $utenti)
+if (isset($_SESSION["username"]) && isset($_SESSION["password"])) {
+    authenticate($_SESSION["username"], $_SESSION["password"], $utenti);
+}
+
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,12 +50,18 @@ authenticate($_SESSION["username"], $_SESSION["password"], $utenti)
 </head>
 <body>
 
-    <h1>Benvenuto <?php echo $_SESSION["username"]?>!</h1>
-    <h3>Il tuo nome utente: <?php echo $_SESSION["username"]?></h3>
-    <h3>La tua password: <?php echo $_SESSION["password"]?></h3>
+    <?php if(isset($_SESSION["isLogged"]) && $_SESSION["isLogged"]==true){ ?>
+            <h1>Benvenuto <?php echo $_SESSION["username"]?>!</h1>
+            <h3>Il tuo nome utente: <?php echo $_SESSION["username"]?></h3>
+            <h3>La tua password: <?php echo $_SESSION["password"]?></h3>
 
-    <a href="./logout.php">Logout</a>
-    
+            <h3>QUESTE INFORMAZIONI SONO RISERVATE AGLI UTENTI LOGGATI</h3>
+            <a href="./logout.php">Logout</a>
+
+    <?php } else { ?>
+        <h3 style="color: red;">Accesso negato</h3>
+        <?php echo $_SESSION["username"], $_SESSION["password"]?>
+    <?php }?>
 </body>
 </html>
 
