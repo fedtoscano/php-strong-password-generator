@@ -30,6 +30,8 @@ $utenti = [
                 <label for="password">Inserisci la tua password</label>
                 <input type="text" name="password" id="password">
 
+                <a href="./logout.php">Logout</a>
+
                 <button type="submit">Accedi</button>
             </form>
         </div>
