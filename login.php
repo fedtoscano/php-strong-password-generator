@@ -1,4 +1,11 @@
 <?php
+$utenti = [
+    "utente1" => "password1",
+    "utente2" => "password2",
+    "utente3" => "password3",
+    "utente4" => "password4",
+    "utente5" => "password5"
+];
 
 ?>
 
