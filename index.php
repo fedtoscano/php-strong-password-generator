@@ -1,6 +1,7 @@
 <?php
-// require_once __DIR__.'/login.php';
 session_start();
+require_once __DIR__."/functions.php";
+
 $utenti = [
     "utente1" => "password1",
     "utente2" => "password2",
@@ -17,27 +18,9 @@ if(isset($_POST["password"])){
     $_SESSION["password"] = $_POST["password"];
 }
 
-/**
- * Questa funzione controlla se nell'array di utenti il nome e la psw coincidono
- */
-function authenticate($user, $psw, $userList){
-    $_SESSION["isLogged"] = false;
-    
-    foreach ($userList as $username => $password) {
-        if($user == $username && $psw == $password){
-            $_SESSION["isLogged"] = true;
-            break;
-        }
-    }
-    
-    return $_SESSION["isLogged"];
-}
-
 if (isset($_SESSION["username"]) && isset($_SESSION["password"])) {
     authenticate($_SESSION["username"], $_SESSION["password"], $utenti);
 }
-
-
 ?>
 
 
@@ -60,8 +43,10 @@ if (isset($_SESSION["username"]) && isset($_SESSION["password"])) {
 
     <?php } else { ?>
         <h3 style="color: red;">Accesso negato</h3>
-        <?php echo $_SESSION["username"], $_SESSION["password"]?>
+        <p>il tuo username: <?php echo $_SESSION["username"]?> </p>
+        <p>la tua password: <?php echo $_SESSION["password"]?> </p>
     <?php }?>
+
 </body>
 </html>
 
