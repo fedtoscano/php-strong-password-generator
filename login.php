@@ -1,12 +1,4 @@
 <?php
-$utenti = [
-    "utente1" => "password1",
-    "utente2" => "password2",
-    "utente3" => "password3",
-    "utente4" => "password4",
-    "utente5" => "password5"
-];
-
 ?>
 
 <!DOCTYPE html>
@@ -30,9 +22,9 @@ $utenti = [
                 <label for="password">Inserisci la tua password</label>
                 <input type="text" name="password" id="password">
 
-                <a href="./logout.php">Logout</a>
-
+                
                 <button type="submit">Accedi</button>
+                <a href="./logout.php">Logout</a>
             </form>
         </div>
     </main>
